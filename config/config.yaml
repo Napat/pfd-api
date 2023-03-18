@@ -1,0 +1,10 @@
+server-address: ":8000"
+
+beeflist-svc:
+  url: "https://baconipsum.com/api/?type=meat-and-filler&paras=99&format=text"
+  timeout: "3s"
+  retry:
+    max-retries: 3
+    wait-time: "1s"
+    base-retry-backoff: "2s"
+    max-wait-time: "20s"

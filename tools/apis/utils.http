@@ -1,0 +1,5 @@
+### hello
+GET http://localhost:8000/health HTTP/1.1
+
+### beef summary
+GET http://localhost:8000/beef/summary HTTP/1.1

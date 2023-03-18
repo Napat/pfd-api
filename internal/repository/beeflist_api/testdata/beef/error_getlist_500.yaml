@@ -1,0 +1,48 @@
+---
+version: 2
+interactions:
+    - id: 0
+      request:
+        proto: HTTP/1.1
+        proto_major: 1
+        proto_minor: 1
+        content_length: 0
+        transfer_encoding: []
+        trailer: {}
+        host: baconipsum.com
+        remote_addr: ""
+        request_uri: ""
+        body: ""
+        form: {}
+        headers:
+            Accept:
+                - application/json
+            Content-Type:
+                - application/json
+            User-Agent:
+                - go-resty/2.7.0 (https://github.com/go-resty/resty)
+        url: https://baconipsum.com/api/?type=meat-and-filler&paras=99&format=text
+        method: GET
+      response:
+        proto: HTTP/2.0
+        proto_major: 2
+        proto_minor: 0
+        transfer_encoding: []
+        trailer: {}
+        content_length: -1
+        uncompressed: true
+        body: ""       
+        headers:
+            Access-Control-Allow-Origin:
+                - '*'
+            Content-Type:
+                - text/plain; charset=UTF-8
+            Date:
+                - Thu, 16 Mar 2023 17:06:51 GMT
+            Server:
+                - nginx/1.18.0 (Ubuntu)
+            Vary:
+                - Accept-Encoding
+        status: 500 Internal Server Error
+        code: 500
+        duration: 2.203641833s
