@@ -5,12 +5,17 @@ GOARCH := amd64
 ## run: execete main application in local machine
 .PHONY: run
 run:
-	export APPENV=local; go run -race app/cmd/*.go
+	export APPENV=local; go run -race app/cmd/pfdserv/main.go
 
 ## tidy: special go mod tidy without golang database checksum(GOSUMDB) 
 .PHONY: tidy
 tidy:
 	export GOSUMDB=off ; go mod tidy
+
+## wiregen: generate dependency injection wire_gen.go from wire.go(+build wireinject)
+.PHONY: wiregen
+wiregen:
+	wire ./...
 
 ## test: run go test
 test:

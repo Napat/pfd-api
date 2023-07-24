@@ -3,7 +3,7 @@ package httphandler
 import (
 	"net/http"
 
-	"github.com/Napat/pfd-api/app/internal/service"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/service"
 
 	"log"
 

@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Napat/pfd-api/app/internal/model"
-	"github.com/Napat/pfd-api/app/internal/repository/beeflist_api"
-	mock_beeflist_api "github.com/Napat/pfd-api/app/internal/repository/beeflist_api/mock_service"
-	"github.com/Napat/pfd-api/app/internal/service"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/model"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/repository/beeflist_api"
+	mock_beeflist_api "github.com/Napat/pfd-api/app/internal/pfdserv/repository/beeflist_api/mock_service"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/service"
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"

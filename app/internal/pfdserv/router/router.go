@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/Napat/pfd-api/app/internal/handler/httphandler"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/handler/httphandler"
 
 	"github.com/labstack/echo/v4"
 )

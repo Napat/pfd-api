@@ -6,6 +6,7 @@ require (
 	github.com/Napat/go_loadconfig_sample v1.0.0
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/golang/mock v1.6.0
+	github.com/google/wire v0.5.0
 	github.com/labstack/echo/v4 v4.10.2
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.1

@@ -9,14 +9,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Napat/pfd-api/app/internal/config"
-	"github.com/Napat/pfd-api/app/internal/handler/httphandler"
-	"github.com/Napat/pfd-api/app/internal/repository/beeflist_api"
-	"github.com/Napat/pfd-api/app/internal/router"
-	"github.com/Napat/pfd-api/app/internal/service"
-
 	"github.com/Napat/go_loadconfig_sample/pkg/configurer"
-	"github.com/go-resty/resty/v2"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/config"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/diwire"
 	"github.com/labstack/echo/v4"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
@@ -30,10 +25,7 @@ func main() {
 		panic(errors.Wrap(err, "load app config error"))
 	}
 
-	beefListAdaptor := beeflist_api.NewBeefListAdaptor(&cfg.BeeflistAdaptor, resty.New())
-	svc := service.NewBeefService(beefListAdaptor)
-	h := httphandler.NewHttpHandler(svc)
-	httpServer := router.NewHttpServer(h)
+	httpServer := diwire.InitializeHttpServer(cfg)
 
 	go func() {
 		if err := httpServer.Start(cfg.ServerAddress); err != nil {

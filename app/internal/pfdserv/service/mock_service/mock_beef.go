@@ -6,9 +6,9 @@ package mock_service
 
 import (
 	context "context"
-	model "github.com/Napat/pfd-api/app/internal/model"
 	reflect "reflect"
 
+	model "github.com/Napat/pfd-api/app/internal/pfdserv/model"
 	gomock "github.com/golang/mock/gomock"
 )
 

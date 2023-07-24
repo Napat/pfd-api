@@ -11,8 +11,8 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/Napat/pfd-api/app/internal/config"
-	"github.com/Napat/pfd-api/app/internal/model"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/config"
+	"github.com/Napat/pfd-api/app/internal/pfdserv/model"
 
 	"github.com/go-resty/resty/v2"
 )
