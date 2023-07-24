@@ -6,11 +6,12 @@ import (
 	"context"
 	"errors"
 	"testing"
+	"time"
 
-	"github.com/Napat/pfd-api/internal/model"
-	"github.com/Napat/pfd-api/internal/repository/beeflist_api"
-	mock_beeflist_api "github.com/Napat/pfd-api/internal/repository/beeflist_api/mock_service"
-	"github.com/Napat/pfd-api/internal/service"
+	"github.com/Napat/pfd-api/app/internal/model"
+	"github.com/Napat/pfd-api/app/internal/repository/beeflist_api"
+	mock_beeflist_api "github.com/Napat/pfd-api/app/internal/repository/beeflist_api/mock_service"
+	"github.com/Napat/pfd-api/app/internal/service"
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
@@ -22,6 +23,12 @@ func TestSummary(t *testing.T) {
 	t.Run("happy path", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
 		defer ctrl.Finish()
+
+		service.Now = func() time.Time {
+			t, _ := time.Parse(time.DateTime, "2006-01-02 10:00:00")
+			return t
+		}
+
 		mockBeefBeefListAdaptor := mock_beeflist_api.NewMockIBeefListAdaptor(ctrl)
 		mockBeefBeefListAdaptor.EXPECT().GetList(ctx).Return(&model.BeeflistAdaptorResponse{
 			BeefSummary: map[string]map[string]int{
@@ -59,8 +66,34 @@ func TestSummary(t *testing.T) {
 	t.Run("sad path: got some error", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
 		defer ctrl.Finish()
+
+		service.Now = func() time.Time {
+			t, _ := time.Parse(time.DateTime, "2006-01-02 10:00:00")
+			return t
+		}
+
 		mockBeefBeefListAdaptor := mock_beeflist_api.NewMockIBeefListAdaptor(ctrl)
 		mockBeefBeefListAdaptor.EXPECT().GetList(ctx).Return(nil, errors.New("some error"))
+
+		blasvc := service.NewBeefService(mockBeefBeefListAdaptor)
+		_, err := blasvc.Summary(ctx)
+
+		assert.Error(t, err)
+	})
+
+	t.Run("sad path: not working hour", func(t *testing.T) {
+		ctrl := gomock.NewController(t)
+		defer ctrl.Finish()
+
+		service.Now = func() time.Time {
+			t, _ := time.Parse(time.DateTime, "2006-01-02 05:00:00")
+			return t
+		}
+
+		mockBeefBeefListAdaptor := mock_beeflist_api.NewMockIBeefListAdaptor(ctrl)
+		// we use .AnyTimes() to prevent error because this case is not called mockBeefBeefListAdaptor adapter
+		// note that we may no need to declare mockBeefBeefListAdaptor and pass nil to NewBeefService
+		mockBeefBeefListAdaptor.EXPECT().GetList(ctx).Return(nil, errors.New("not working hour")).AnyTimes()
 
 		blasvc := service.NewBeefService(mockBeefBeefListAdaptor)
 		_, err := blasvc.Summary(ctx)

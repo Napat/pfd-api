@@ -4,10 +4,12 @@ package service
 
 import (
 	"context"
+	"errors"
 	"log"
+	"time"
 
-	"github.com/Napat/pfd-api/internal/model"
-	"github.com/Napat/pfd-api/internal/repository/beeflist_api"
+	"github.com/Napat/pfd-api/app/internal/model"
+	"github.com/Napat/pfd-api/app/internal/repository/beeflist_api"
 )
 
 type IBeefService interface {
@@ -26,7 +28,15 @@ func NewBeefService(
 	}
 }
 
+var Now = time.Now
+
 func (s *BeefService) Summary(ctx context.Context) (*model.BeefSummaryResponse, error) {
+
+	const HOUR_0800AM = 7
+	if Now().Hour() < HOUR_0800AM {
+		return nil, errors.New("not working hour")
+	}
+
 	beefListResp, err := s.beefListAdaptor.GetList(ctx)
 	if err != nil {
 		log.Println("Summary", err)

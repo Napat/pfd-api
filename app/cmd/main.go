@@ -9,11 +9,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Napat/pfd-api/internal/config"
-	"github.com/Napat/pfd-api/internal/handler/httphandler"
-	"github.com/Napat/pfd-api/internal/repository/beeflist_api"
-	"github.com/Napat/pfd-api/internal/router"
-	"github.com/Napat/pfd-api/internal/service"
+	"github.com/Napat/pfd-api/app/internal/config"
+	"github.com/Napat/pfd-api/app/internal/handler/httphandler"
+	"github.com/Napat/pfd-api/app/internal/repository/beeflist_api"
+	"github.com/Napat/pfd-api/app/internal/router"
+	"github.com/Napat/pfd-api/app/internal/service"
 
 	"github.com/Napat/go_loadconfig_sample/pkg/configurer"
 	"github.com/go-resty/resty/v2"

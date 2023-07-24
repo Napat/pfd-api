@@ -5,9 +5,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/Napat/pfd-api/internal/config"
-	"github.com/Napat/pfd-api/internal/model"
-	"github.com/Napat/pfd-api/internal/repository/beeflist_api"
+	"github.com/Napat/pfd-api/app/internal/config"
+	"github.com/Napat/pfd-api/app/internal/model"
+	"github.com/Napat/pfd-api/app/internal/repository/beeflist_api"
 
 	"github.com/go-resty/resty/v2"
 	"github.com/stretchr/testify/assert"

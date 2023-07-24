@@ -7,9 +7,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/Napat/pfd-api/internal/handler/httphandler"
-	"github.com/Napat/pfd-api/internal/model"
-	"github.com/Napat/pfd-api/internal/service/mock_service"
+	"github.com/Napat/pfd-api/app/internal/handler/httphandler"
+	"github.com/Napat/pfd-api/app/internal/model"
+	"github.com/Napat/pfd-api/app/internal/service/mock_service"
 
 	"github.com/golang/mock/gomock"
 	"github.com/labstack/echo/v4"

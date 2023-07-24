@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+ pfd-api:
+    container_name: pfd-api
+    build:
+      context: .
+      dockerfile: deployment/local/Dockerfile
+      args:
+        GO_VERSION: golang:1.20-alpine
+        APP_NAME: pfd-api
+        MY_AUTH_TOKEN: orbe6VPnwjy9j7-nWaza
+        BIN_NAME: main
+        EXECUTE_PATH: cmd/main.go
+    x-develop:
+      watch:
+        - action: rebuild
+          path: ./
+    ports:
+      - 8000:8000
