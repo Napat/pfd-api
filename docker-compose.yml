@@ -1,20 +1,64 @@
 version: '3.9'
 
 services:
- pfd-api:
-    container_name: pfd-api
-    build:
-      context: .
-      dockerfile: deployment/local/Dockerfile
-      args:
-        GO_VERSION: golang:1.20-alpine
-        APP_NAME: pfd-api
-        MY_AUTH_TOKEN: orbe6VPnwjy9j7-nWaza
-        BIN_NAME: main
-        EXECUTE_PATH: cmd/main.go
-    x-develop:
-      watch:
-        - action: rebuild
-          path: ./
+  # pfd-api:
+  #   container_name: pfd-api
+  #   build:
+  #     context: .
+  #     dockerfile: deployment/local/Dockerfile
+  #     args:
+  #       GO_VERSION: golang:1.20-alpine
+  #       APP_NAME: pfd-api
+  #       MY_AUTH_TOKEN: orbe6VPnwjy9j7-nWaza
+  #       BIN_NAME: main
+  #       EXECUTE_PATH: cmd/main.go
+  #   x-develop:
+  #     watch:
+  #       - action: rebuild
+  #         path: ./
+  #   ports:
+  #     - 8000:8000
+  db:
+    image: mysql:8.0
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - vmysql:/var/lib/mysql
     ports:
-      - 8000:8000
+      - "3306:3306"
+    environment:
+      MYSQL_USER: ktb
+      MYSQL_PASSWORD: P@ssw0rd
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_DATABASE: ktb_glo
+      TZ: Asia/Bangkok
+
+  adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
+        
+  redis:
+    container_name: redis
+    image: redis:7.0-bookworm
+    hostname: redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+    - "8081:8081"
+
+volumes:
+  vmysql:
+  vredis:

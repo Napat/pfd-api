@@ -60,6 +60,9 @@ gosec:
 govulncheck: 
 	govulncheck ./... 
 
-
 ## security: run make gosec and make govulncheck
 security: gosec govulncheck
+
+## gogen: run all go genrate(mockgen, etc)
+gogen:
+	go generate ./...
