@@ -63,6 +63,12 @@ govulncheck:
 ## security: run make gosec and make govulncheck
 security: gosec govulncheck
 
+## security_install: install tools: gosec, govulncheck
+.PHONY: security_install
+security_install: 
+	go install github.com/securego/gosec/v2/cmd/gosec@latest
+	go install golang.org/x/vuln/cmd/govulncheck@latest
+	
 ## gogen: run all go genrate(mockgen, etc)
 gogen:
 	go generate ./...
